@@ -1,10 +1,14 @@
-import React from "react";
+"use client";
+import React, { useContext } from "react";
 import { GoSidebarCollapse } from "react-icons/go";
 import { FaRegEdit } from "react-icons/fa";
 import { FiSearch } from "react-icons/fi";
 import Image from "next/image";
 import { BsThreeDots } from "react-icons/bs";
+import { dataContext } from "@/app/context/chatContext";
 const Sidebar = () => {
+  const { setCompnent } = useContext(dataContext);
+
   const data = [
     { chat: "Today" },
     { chat: "Yesterday" },
@@ -20,15 +24,17 @@ const Sidebar = () => {
         <GoSidebarCollapse size={25} className="cursor-pointer text-gray-600" />
         <div className="flex gap-3 items-center">
           <FiSearch size={25} className="cursor-pointer  text-gray-600" />
-          <FaRegEdit
-            size={25}
-            className="cursor-pointer text-gray-600"
-          />
+          <FaRegEdit size={25} className="cursor-pointer text-gray-600" />
         </div>
       </div>
 
       {/* .......start-chat...... */}
-      <di className="flex items-center gap-2 hover:bg-gray-100 rounded-md py-1 px-2">
+      <di
+        onClick={() => {
+          setCompnent("home");
+        }}
+        className="flex items-center gap-2 hover:bg-gray-100 rounded-md py-1 px-2 cursor-pointer"
+      >
         <Image
           src="chatgpt-logo.svg"
           alt="logo"

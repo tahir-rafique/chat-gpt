@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { FaAngleDown } from "react-icons/fa6";
 import { HiOutlineMicrophone } from "react-icons/hi2";
 import { RiVoiceAiLine } from "react-icons/ri";
@@ -14,9 +14,10 @@ import { BsStars } from "react-icons/bs";
 import Image from "next/image";
 import { AiOutlineCheck } from "react-icons/ai";
 import { GoArrowUp } from "react-icons/go";
+import { dataContext } from "@/app/context/chatContext";
 
 const Main = () => {
-  const [component, setCompnent] = useState("home");
+  const { component, setCompnent } = useContext(dataContext);
 
   const [inputValue, setInputValue] = useState();
   const handleInputValue = (e) => {
@@ -112,14 +113,17 @@ const Main = () => {
           <div className="h-full max-w-[1000px] mx-auto">
             {/* ...............user-chat................. */}
             <div className="flex justify-end">
-              <p className="p-2 bg-[#F4F4F4] rounded-[50px] px-4 text-sm ">{inputValue}</p>
-      
+              <p className="p-2 bg-[#F4F4F4] rounded-[50px] px-4 text-sm ">
+                {inputValue}
+              </p>
             </div>
 
             {/* ...............model-response.................... */}
             <div>
-              <p className="p-2 text-sm ">Hey! Just to clarify—I'm ChatGPT, not Tahir 😄. But I'm here to help you with anything you need. What's up?</p>
-              
+              <p className="p-2 text-sm ">
+                Hey! I'm ChatGPT 😄, I'm here to help you with anything you
+                need. What's up?
+              </p>
             </div>
           </div>
         )}
