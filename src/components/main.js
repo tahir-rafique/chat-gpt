@@ -60,7 +60,7 @@ const Main = () => {
       className={`${
         showSidebar
           ? "w-[calc(100%_-_270px)] p-5  flex flex-col gap-4"
-          : "w-full p-5"
+          : "w-full p-5 "
       } `}
     >
       {/* ...............top-bar................ */}
