@@ -15,9 +15,11 @@ import Image from "next/image";
 import { AiOutlineCheck } from "react-icons/ai";
 import { GoArrowUp } from "react-icons/go";
 import { dataContext } from "@/app/context/chatContext";
+import { GoSidebarCollapse } from "react-icons/go";
 
 const Main = () => {
-  const { component, setCompnent } = useContext(dataContext);
+  const { component, setCompnent, setShowSidebar, showSidebar } =
+    useContext(dataContext);
 
   const [inputValue, setInputValue] = useState();
   const handleInputValue = (e) => {
@@ -54,16 +56,38 @@ const Main = () => {
   }, [showUpgradBox]);
 
   return (
-    <div className="w-[calc(100%_-_270px)] p-5  flex flex-col gap-4">
+    <div
+      className={`${
+        showSidebar
+          ? "w-[calc(100%_-_270px)] p-5  flex flex-col gap-4"
+          : "w-full p-5"
+      } `}
+    >
       {/* ...............top-bar................ */}
       <div
-        className="flex justify-between  relative "
+        className={`flex justify-between  relative`}
         onClick={() => setShowUpgradBox((prev) => !prev)}
       >
-        <div className="flex items-center  gap-2  cursor-pointer  hover:bg-gray-100 rounded-md p-2 px-3 relative">
+        <div
+          className={`${
+            showSidebar ? "" : "ml-10"
+          }  flex items-center  gap-2 cursor-pointer  hover:bg-gray-100 rounded-md p-2 px-3`}
+        >
           <p className="font-[300] text-xl">ChatGPT</p>
           <FaAngleDown className="text-gray-300" />
         </div>
+
+        {showSidebar ? (
+          ""
+        ) : (
+          <div className="absolute left-3 top-2 z-[999]">
+            <GoSidebarCollapse
+              size={25}
+              className="cursor-pointer text-gray-600"
+              onClick={() => setShowSidebar(true)}
+            />
+          </div>
+        )}
 
         {/* ......upgrade-box.......... */}
         <div
@@ -100,9 +124,6 @@ const Main = () => {
             <AiOutlineCheck />
           </div>
         </div>
-
-        {/* ...... */}
-        {/* <div>profile</div> */}
       </div>
 
       {/* ..........................chat.......................... */}
